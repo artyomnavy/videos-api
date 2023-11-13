@@ -124,6 +124,10 @@ videosRouter.put('/:id', (req: RequestWithParamsAndBody<Params, UpdateVideoDto>,
         errors.errorsMessages.push({message: 'Invalid canBeDownloaded', field: 'canBeDownloaded'})
     }
 
+    if (typeof publicationDate !== 'string') {
+        errors.errorsMessages.push({message: 'Invalid publicationDate', field: 'publicationDate'})
+    }
+
     if (typeof canBeDownloaded === 'undefined') {
         canBeDownloaded = false
     }
