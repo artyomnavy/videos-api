@@ -49,11 +49,11 @@ videosRouter.post('/', (req: RequestWithBody<CreateVideoDto> , res: Response) =>
 
     let {title, author, availableResolutions} = req.body
 
-    if (!title || title.trim().length < 1 || title.trim().length > 40) {
+    if (!title || typeof title !== 'string' || title.trim().length < 1 || title.trim().length > 40) {
         errors.errorsMessages.push({message: 'Invalid title', field: 'title'})
     }
 
-    if (!author || author.trim().length < 1 || author.trim().length > 20) {
+    if (!author || typeof author !== 'string' || author.trim().length < 1 || author.trim().length > 20) {
         errors.errorsMessages.push({message: 'Invalid author', field: 'author'})
     }
 
@@ -102,11 +102,11 @@ videosRouter.put('/:id', (req: RequestWithParamsAndBody<Params, UpdateVideoDto>,
 
     let {title, author, availableResolutions, canBeDownloaded, minAgeRestriction, publicationDate} = req.body
 
-    if (!title || title.trim().length < 1 || title.trim().length > 40) {
+    if (!title || typeof title !== 'string' || title.trim().length < 1 || title.trim().length > 40) {
         errors.errorsMessages.push({message: 'Invalid title', field: 'title'})
     }
 
-    if (!author || author.trim().length < 1 || author.trim().length > 20) {
+    if (!author || typeof author !== 'string' || author.trim().length < 1 || author.trim().length > 20) {
         errors.errorsMessages.push({message: 'Invalid author', field: 'author'})
     }
 
@@ -118,6 +118,10 @@ videosRouter.put('/:id', (req: RequestWithParamsAndBody<Params, UpdateVideoDto>,
         })
     } else {
         availableResolutions = []
+    }
+
+    if (typeof canBeDownloaded !== 'boolean' && typeof canBeDownloaded !== 'undefined') {
+        errors.errorsMessages.push({message: 'Invalid canBeDownloaded', field: 'canBeDownloaded'})
     }
 
     if (typeof canBeDownloaded === 'undefined') {
