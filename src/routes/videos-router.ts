@@ -96,6 +96,14 @@ videosRouter.post('/', (req: RequestWithBody<CreateVideoDto> , res: Response) =>
 videosRouter.put('/:id', (req: RequestWithParamsAndBody<Params, UpdateVideoDto>, res) => {
     const id = +req.params.id
 
+    const videoIndex = videos.findIndex(v => v.id === id)
+    const video = videos.find(v => v.id === id)
+
+    if (!video) {
+        res.sendStatus(404)
+        return
+    }
+
     let errors: ErrorType = {
         errorsMessages: []
     }
@@ -140,14 +148,6 @@ videosRouter.put('/:id', (req: RequestWithParamsAndBody<Params, UpdateVideoDto>,
 
     if (errors.errorsMessages.length) {
         res.status(400).send(errors)
-        return
-    }
-
-    const videoIndex = videos.findIndex(v => v.id === id)
-    const video = videos.find(v => v.id === id)
-
-    if (!video) {
-        res.sendStatus(404)
         return
     }
 
