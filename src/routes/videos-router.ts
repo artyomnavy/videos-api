@@ -158,7 +158,7 @@ videosRouter.put('/:id', (req: RequestWithParamsAndBody<Params, UpdateVideoDto>,
         minAgeRestriction: minAgeRestriction ? minAgeRestriction : video.minAgeRestriction,
         title: title ? title : video.title,
         author: author ? author : video.author,
-        availableResolutions: video.availableResolutions.length ? video.availableResolutions : [...availableResolutions],
+        availableResolutions: availableResolutions ? availableResolutions : video.availableResolutions,
         publicationDate: publicationDate ? publicationDate : video.publicationDate
     }
 
