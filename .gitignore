@@ -1,7 +1,4 @@
 .idea
-__tests__
 node_modules
 dist
-nodemon.json
-jest.config.ts
 yarn-error.log*
