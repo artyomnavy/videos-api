@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "name": "homework-01",
+  "name": "videos-api",
   "builds": [
     { "src": "src/index.ts", "use": "@vercel/node" }
   ],
